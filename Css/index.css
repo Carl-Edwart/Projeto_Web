@@ -163,3 +163,25 @@ footer{
     width: 3.5rem;
     height: 3.5rem;
 }
+#links{
+    width: 35rem;
+    height: 5rem;
+    font-size: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    text-align: center;
+}
+.link{
+    width: 10rem;
+    color: white;
+    transition: 0.4s ease-in;
+}
+.link:hover{
+    text-shadow: 0 0 0.2rem white;
+}
+#links>p{
+    color: white;
+}
