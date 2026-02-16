@@ -96,10 +96,11 @@ header{
     background-color: rgb(25, 25, 25);
     color: white;
     text-align: justify;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 0 0.6rem;
+    padding: 1rem;
     width: 25rem;
     height: 25rem;
     margin: 0 6rem;
@@ -116,6 +117,9 @@ header{
     background-color: white;
     color: black;
 }
+.card>p{
+    margin: 2rem;
+}
 footer{
     height: 40vh;
     width: 100%;
@@ -123,23 +127,29 @@ footer{
     position: absolute;
     top: 220vh;
     z-index: 1;
+}
+.barra{
+    background-color: rgb(20, 20, 20);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
+    height: 30vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 #classificacao{
     background-color: rgb(15, 15, 15);
+    font-size: 0.8rem;
     color: white;
-    width: 16rem;
-    height: 8rem;
+    width: 14rem;
+    height: 6rem;
     display: flex;
     flex-wrap: wrap;
     padding: 0 1rem 1rem 1rem;
     justify-content: center;
-    align-items: stretch;
     border: solid 0.1rem black;
     border-radius: 0.6rem;
-    margin: 3rem 5rem;
     text-align: center;
     transition: 0.4s ease-out;
 }
@@ -153,17 +163,22 @@ footer{
 #mais16{
     border-radius: 0.2rem;
     background-color: rgb(25, 25, 25);
-    width: 15rem;
-    height: 3.5rem;
+    width: 13rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
 }
 #ico16{
     border-radius: 0.6rem;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
+}
+#classificacao>p{
+    margin: 0.6rem;
 }
 #links{
+    background-color: rgb(15, 15, 15);
+    border-radius: 0.8rem;
     width: 35rem;
     height: 5rem;
     font-size: 0.8rem;
@@ -171,17 +186,49 @@ footer{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    text-decoration: none;
     text-align: center;
+    color: white;
+    transition: 0.4s ease-out;
+}
+#links:active{
+    box-shadow: 0 0 0.5rem white;
 }
 .link{
-    width: 10rem;
     color: white;
-    transition: 0.4s ease-in;
+    width: 10rem;
+    transition: 0.4s ease-out;
 }
 .link:hover{
-    text-shadow: 0 0 0.2rem white;
+    text-shadow: 0 0 0.5rem white;
 }
-#links>p{
+#links>*{
+    text-decoration: none;
+}
+#ico-apple{
+    background-color: rgb(15, 15, 15);
+    word-spacing: 0;
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10rem;
+    width: 6rem;
+    height: 6rem;
+    transition: 0.4s ease-out;
+}
+#apple{
+    width: 4rem;
+    height: 4rem;
+    margin-top: 0.4rem;
+}
+#ico-apple:hover{
+    transform: scale(0.02rem);
+    box-shadow: 0 0 0.5rem white;
+}
+#ico-apple:active{
+    transform: scale(2);
+    box-shadow: 0 0 0 white;
+}
+#ico-apple>p{
+    margin: 0;
 }
