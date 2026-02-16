@@ -1,0 +1,235 @@
+html{
+    background-color: beige;
+}
+body{
+    display: flex;
+    justify-content: center;
+    margin: 30vh 0 0 0;
+    height: 220vh;
+}
+#bg{
+    position: fixed;
+    top: 20vh;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+    width: 85%;
+    height: auto;
+}
+#fundo{
+    width: 100%;
+    height: auto;
+    border: solid 0.8rem rgb(25, 25, 25);
+    border-radius: 0.4rem;
+}
+main{
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    float: inline-start;
+    flex-wrap: wrap;
+}
+header{
+    background-color: rgb(25, 25, 25);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+    z-index: 2;
+}
+#foto_index{
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 100%;
+    margin-bottom: 0.2rem;
+    transition: 0.4s ease;
+}
+#foto_index:hover{
+    box-shadow: 0 0 0.3rem white;
+    transform: scale(1.05);
+}
+#roll{
+    display: flex;
+    width: 70%;
+    height: 6vh;
+    justify-content: center;
+    margin-bottom: 0.1rem;
+}
+#roll>a{
+    background-color: rgb(50, 50, 50);
+    width: 6rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    margin: 0 0.5rem;
+    overflow: hidden;
+    border-radius: 0.2rem;
+    transition: 0.2s ease-in;
+}
+#roll>a:hover{
+    background-color: white;
+    color: black;
+    border: 0.1rem white;
+    height: 7vh;
+    transform: translateY(-1vh);
+    box-shadow: inset 0 0 0.3rem rgb(50, 50, 50);
+}
+#insta_ico{
+    width: 3.2rem;
+    height: 3.2rem;
+    margin-bottom: 0.2rem;
+    border-radius: 100%;
+    transition: 0.4s ease;
+}
+#insta_ico:hover{
+    box-shadow: inset 0 0 0.3rem white;
+    transform: scale(1.05);
+}
+.card{
+    background-color: rgb(25, 25, 25);
+    color: white;
+    text-align: justify;
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    width: 22rem;
+    height: 22rem;
+    margin: 0 6rem;
+    border: solid 0.1rem white;
+    border-radius: 1rem;
+    transition: 0.6s ease-out;
+}
+.card:hover{
+    transform: scale(1.01) translateY(-0.4rem);
+    box-shadow: white 0 0 0.5rem;
+}
+.card:active{
+    transform: rotate3d(1.2, 0.5, 1.7, 180deg);
+    background-color: white;
+    color: black;
+}
+.card>p{
+    margin: 2rem;
+}
+footer{
+    height: 40vh;
+    width: 100%;
+    background: rgb(30, 30, 30);
+    position: absolute;
+    top: 220vh;
+    z-index: 1;
+}
+.barra{
+    background-color: rgb(20, 20, 20);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 34vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+#classificacao{
+    background-color: rgb(15, 15, 15);
+    font-size: 0.8rem;
+    color: white;
+    width: 14rem;
+    height: 6rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 1rem 1rem 1rem;
+    justify-content: center;
+    border: solid 0.1rem black;
+    border-radius: 0.6rem;
+    text-align: center;
+    transition: 0.4s ease-out;
+}
+#classificacao:hover{
+    transform: scale(1.01);
+    box-shadow: 0 0 0.5rem white;
+}
+#classificacao:active{
+    opacity: 0;
+}
+#mais16{
+    border-radius: 0.2rem;
+    background-color: rgb(25, 25, 25);
+    width: 13rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+}
+#ico16{
+    border-radius: 0.6rem;
+    width: 3rem;
+    height: 3rem;
+}
+#classificacao>p{
+    margin: 0.6rem;
+}
+#links{
+    background-color: rgb(15, 15, 15);
+    border-radius: 0.8rem;
+    width: 35rem;
+    height: 5rem;
+    font-size: 0.8rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    transition: 0.4s ease-out;
+}
+#links:active{
+    box-shadow: 0 0 0.5rem white;
+}
+.link{
+    color: white;
+    width: 10rem;
+    transition: 0.4s ease-out;
+}
+.link:hover{
+    text-shadow: 0 0 0.5rem white;
+}
+#links>*{
+    text-decoration: none;
+}
+#ico-apple{
+    background-color: rgb(15, 15, 15);
+    word-spacing: 0;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10rem;
+    width: 6rem;
+    height: 6rem;
+    transition: 0.4s ease-out;
+}
+#apple{
+    width: 4rem;
+    height: 4rem;
+    margin-top: 0.4rem;
+}
+#ico-apple:hover{
+    transform: scale(0.02rem);
+    box-shadow: 0 0 0.5rem white;
+}
+#ico-apple:active{
+    transform: scale(2);
+    box-shadow: 0 0 0 white;
+}
+#ico-apple>p{
+    margin: 0;
+}
