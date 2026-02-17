@@ -17,7 +17,7 @@ function onScroll() {
   lastScroll = scroll;
 
   // ponto fixo: 60vh antes do fim real da página
-  const limite = pageH - winH - vh(1.4);
+  const limite = pageH - winH - vh(1.3);
 
   /* ===== DESCENDO ===== */
   if (estado === "fixed" && descendo && scroll >= limite) {

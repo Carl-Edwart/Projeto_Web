@@ -5,7 +5,7 @@ body{
     display: flex;
     justify-content: center;
     margin: 30vh 0 0 0;
-    height: 220vh;
+    height: 300vh;
 }
 #bg{
     position: fixed;
@@ -26,7 +26,7 @@ body{
 main{
     z-index: 1;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     float: inline-start;
     flex-wrap: wrap;
 }
@@ -96,15 +96,16 @@ header{
 .card{
     background-color: rgb(25, 25, 25);
     color: white;
-    text-align: justify;
     font-size: 1.2rem;
+    text-align: justify;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: stretch;
+    align-items: stretch;
     padding: 1rem;
-    width: 22rem;
-    height: 22rem;
-    margin: 0 6rem;
+    width: 26rem;
+    height: 30rem;
+    margin: 0 2rem;
     border: solid 0.1rem white;
     border-radius: 1rem;
     transition: 0.6s ease-out;
@@ -118,15 +119,22 @@ header{
     background-color: white;
     color: black;
 }
+.card>img{
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0.6rem;
+}
 .card>p{
-    margin: 2rem;
+    margin: 0.8rem;
+    line-height: 1.4;
 }
 footer{
     height: 40vh;
     width: 100%;
     background: rgb(30, 30, 30);
     position: absolute;
-    top: 220vh;
+    top: 300vh;
     z-index: 1;
 }
 .barra{
