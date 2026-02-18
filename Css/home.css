@@ -1,6 +1,14 @@
 html{
     background-color: rgb(50, 50, 50);
 }
+#img_cokkie{
+    display: none;
+    position: fixed;
+    top: 1.5vh;
+    left: 12%;
+    width: 3.2rem;
+    height: 3.2rem;
+}
 body{
     display: flex;
     justify-content: center;
