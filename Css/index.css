@@ -1,5 +1,5 @@
 html{
-    background-color: beige;
+    background-color: rgb(50, 50, 50);
 }
 body{
     display: flex;
@@ -96,6 +96,7 @@ header{
 .card{
     background-color: rgb(25, 25, 25);
     color: white;
+    text-shadow: 0 0 0.3rem white;
     text-align: justify;
     font-size: 1.2rem;
     display: flex;
@@ -111,7 +112,8 @@ header{
 }
 .card:hover{
     transform: scale(1.01) translateY(-0.4rem);
-    box-shadow: white 0 0 0.5rem;
+    box-shadow: white 0 0 0.6rem;
+    text-shadow: 0 0 0 white;
 }
 .card:active{
     transform: rotate3d(1.2, 0.5, 1.7, 180deg);
