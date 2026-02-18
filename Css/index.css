@@ -1,5 +1,61 @@
 html{
-    background-color: rgb(50, 50, 50);
+    background-color: beige;
+}
+.cokkie{
+    background-color: rgb(25, 25, 25);
+    color: white;
+    border: solid 0.4rem black;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.2rem;
+    position: fixed;
+    top: 30vh;
+    left: auto;
+    padding: 1.5rem;
+    width: 25rem;
+    height: 15rem;
+    z-index: 3;
+    transition: 0.4s ease-out;
+}
+.cokkie:hover{
+    transform: scale(1.05);
+    box-shadow: 0 0 0.5rem white;
+    text-shadow: 0 0 0.1rem white;
+}
+#btn-c{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+#sim{
+    background-color: lime;
+    color: black;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 0.4rem;
+    border: solid 0.1rem rgb(15, 15, 15);
+    transition: 0.2s ease-out;
+}
+#nao{
+    background-color: red;
+    color: black;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 0.4rem;
+    border: solid 0.1rem rgb(15, 15, 15);
+    transition: 0.2s ease-out;
+}
+#btn-c>button:hover{
+    transform: scale(1.01);
+    border: solid 0.1rem white;
+    color: white;
+}
+#btn-c>button:active{
+    transform: scale(0.9);
 }
 body{
     display: flex;
@@ -96,7 +152,6 @@ header{
 .card{
     background-color: rgb(25, 25, 25);
     color: white;
-    text-shadow: 0 0 0.3rem white;
     text-align: justify;
     font-size: 1.2rem;
     display: flex;
@@ -113,7 +168,7 @@ header{
 .card:hover{
     transform: scale(1.01) translateY(-0.4rem);
     box-shadow: white 0 0 0.6rem;
-    text-shadow: 0 0 0 white;
+    text-shadow: 0 0 0.1rem white;
 }
 .card:active{
     transform: rotate3d(1.2, 0.5, 1.7, 180deg);
