@@ -7,7 +7,14 @@ require dirname(__DIR__, 2) . '/backend/helpers.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-$q = trim((string) ($_GET['q'] ?? ''));
+$usuario = usuarioAtual();
+if (!$usuario || (int) $usuario['primeiro_acesso'] === 1) {
+    http_response_code($usuario ? 403 : 401);
+    echo json_encode(['erro' => $usuario ? 'Troca de senha obrigatória.' : 'Autenticação necessária.'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+$q = isset($_GET['q']) && is_scalar($_GET['q']) ? trim((string) $_GET['q']) : '';
 if (mb_strlen($q) < 2) {
     echo '[]';
     exit;

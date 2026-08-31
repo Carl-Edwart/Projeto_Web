@@ -1,5 +1,6 @@
 <?php
 require dirname(__DIR__, 2) . '/backend/helpers.php';
+$usuario = exigirAutenticacao();
 $pdo = db();
 
 $itens = $pdo->query(
@@ -57,6 +58,7 @@ require dirname(__DIR__, 2) . '/templates/header.php';
                     <a class="btn btn-neutro btn-pequeno" href="form.php?id=<?= (int) $c['id_cidade'] ?>">✏️ Editar</a>
                     <form method="post" action="excluir.php"
                           data-confirmar="Excluir a cidade “<?= e($c['nome']) ?>”? Esta ação não pode ser desfeita.">
+                        <?= campoCsrf() ?>
                         <input type="hidden" name="id" value="<?= (int) $c['id_cidade'] ?>">
                         <button type="submit" class="btn btn-perigo btn-pequeno">🗑️ Excluir</button>
                     </form>

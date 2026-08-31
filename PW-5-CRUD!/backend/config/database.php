@@ -41,10 +41,14 @@ function db(): PDO
         $pdo = banco_demo($opcoes); // fallback para pré-visualização
     }
 
+    if (!defined('MODO_DEMO')) {
+        define('MODO_DEMO', false);
+    }
+
     return $pdo;
 }
 
-/** Banco de demonstração (SQLite) — mesmo esquema e mesmos dados do bd_mundo.sql */
+/** Banco de demonstração (SQLite) — esquema e dados geográficos do bd_mundo.sql */
 function banco_demo(array $opcoes): PDO
 {
     $arquivo = __DIR__ . '/../../database/demo.sqlite';
@@ -100,6 +104,45 @@ function banco_demo(array $opcoes): PDO
         ");
         require __DIR__ . '/semente.php';
         semear($pdo);
+    }
+
+    /* Mantém instalações demo antigas compatíveis com a autenticação. */
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id_usuario        INTEGER PRIMARY KEY AUTOINCREMENT,
+            login             TEXT NOT NULL UNIQUE,
+            nome              TEXT NOT NULL,
+            senha_hash        TEXT NOT NULL,
+            tentativas_falhas INTEGER NOT NULL DEFAULT 0,
+            bloqueado         INTEGER NOT NULL DEFAULT 0,
+            primeiro_acesso   INTEGER NOT NULL DEFAULT 1,
+            criado_em         TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            atualizado_em     TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+        );
+        CREATE INDEX IF NOT EXISTS idx_usuarios_bloqueado ON usuarios (bloqueado);
+        CREATE TABLE IF NOT EXISTS logs (
+            id_log     INTEGER PRIMARY KEY AUTOINCREMENT,
+            id_usuario INTEGER,
+            evento     TEXT NOT NULL,
+            ip         TEXT,
+            criado_em  TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE SET NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_logs_usuario ON logs (id_usuario);
+        CREATE INDEX IF NOT EXISTS idx_logs_evento ON logs (evento);
+        CREATE INDEX IF NOT EXISTS idx_logs_criado_em ON logs (criado_em);
+    ");
+
+    if ((int) $pdo->query('SELECT COUNT(*) FROM usuarios')->fetchColumn() === 0) {
+        $st = $pdo->prepare(
+            'INSERT INTO usuarios (login, nome, senha_hash, tentativas_falhas, bloqueado, primeiro_acesso)
+             VALUES (?, ?, ?, 0, 0, 1)'
+        );
+        $st->execute([
+            'admin',
+            'Administrador',
+            '$2y$12$1xFkhUTCYRfcB4j0JLXCfOYELCrr7U4ZgPLgIkWYPeg0fWv1/d60K',
+        ]);
     }
 
     if (!defined('MODO_DEMO')) {

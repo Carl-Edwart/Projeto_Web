@@ -1,5 +1,6 @@
 <?php
 require dirname(__DIR__, 2) . '/backend/helpers.php';
+$usuario = exigirAutenticacao();
 $pdo = db();
 
 $id    = isset($_GET['id']) ? (int) $_GET['id'] : 0;
@@ -10,6 +11,7 @@ $val   = [
 ];
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+    exigirCsrf();
     $val['nome']           = obrigatorio('nome', 'Nome', $erros);
     $val['id_pais']        = post('id_pais');
     $val['id_governante']  = post('id_governante');
@@ -103,6 +105,7 @@ require dirname(__DIR__, 2) . '/templates/header.php';
 <?php endif; ?>
 
 <form method="post" class="cartao formulario" data-validar>
+    <?= campoCsrf() ?>
     <div class="campo campo-total">
         <label for="nome">Nome *</label>
         <input type="text" id="nome" name="nome" required maxlength="100"

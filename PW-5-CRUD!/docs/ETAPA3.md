@@ -13,6 +13,14 @@
 | `backend/api/buscar.php` | endpoint JSON da **busca dinâmica** (desafio extra) |
 | `README.md` | documentação de entrega |
 
+## 🔐 Autenticação e manutenção de senhas
+
+O sistema também possui login por sessão, logout, proteção das rotas e troca de
+senha em `backend/auth/senha.php`. A conta fica bloqueada no banco após três
+erros consecutivos, e o primeiro acesso exige a troca da senha antes de liberar
+o dashboard e os CRUDs. Os eventos de login, bloqueio, logout e alteração são
+gravados em `logs`, sem armazenar senha ou hash.
+
 ## ✨ Interações implementadas (JavaScript)
 
 - 🗑️ **Modal de confirmação** personalizado antes de qualquer exclusão
@@ -38,6 +46,8 @@
 - [x] Nenhum formulário envia dados inválidos (validado 2×: JS + PHP)
 - [x] Toda exclusão pede confirmação
 - [x] Integridade referencial respeitada em 100% dos caminhos
+- [x] Rotas protegidas por autenticação e primeiro acesso sem bypass por URL
+- [x] Senhas com hash, limite de tentativas e proteção CSRF nos POSTs
 
 ## 🚀 Entrega
 

@@ -12,6 +12,42 @@ CREATE DATABASE IF NOT EXISTS bd_mundo
 USE bd_mundo;
 
 -- ---------------------------------------------------------------------
+-- Tabela: usuarios
+--   · senha_hash recebe somente o resultado de password_hash()
+--   · o bloqueio e o primeiro acesso ficam persistidos no banco
+-- ---------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS usuarios (
+    id_usuario        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    login             VARCHAR(80)  NOT NULL UNIQUE,
+    nome              VARCHAR(120) NOT NULL,
+    senha_hash        VARCHAR(255) NOT NULL,
+    tentativas_falhas TINYINT UNSIGNED NOT NULL DEFAULT 0,
+    bloqueado         TINYINT(1) NOT NULL DEFAULT 0,
+    primeiro_acesso   TINYINT(1) NOT NULL DEFAULT 1,
+    criado_em         DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    atualizado_em     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_usuarios_bloqueado (bloqueado)
+) ENGINE = InnoDB;
+
+-- ---------------------------------------------------------------------
+-- Tabela: logs
+--   · eventos de autenticação e manutenção, sem senhas ou hashes
+-- ---------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS logs (
+    id_log     INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT UNSIGNED DEFAULT NULL,
+    evento     VARCHAR(40) NOT NULL,
+    ip         VARCHAR(45) DEFAULT NULL,
+    criado_em  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_logs_usuario
+        FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    INDEX idx_logs_usuario (id_usuario),
+    INDEX idx_logs_evento (evento),
+    INDEX idx_logs_criado_em (criado_em)
+) ENGINE = InnoDB;
+
+-- ---------------------------------------------------------------------
 -- Tabela: continentes
 -- ---------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS continentes (
@@ -80,6 +116,11 @@ CREATE TABLE IF NOT EXISTS cidades (
         FOREIGN KEY (id_governante) REFERENCES governantes (id_governante)
         ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB;
+
+-- Usuário inicial para demonstração; a senha deve ser trocada no primeiro acesso.
+-- A credencial correspondente está documentada no README.md.
+INSERT INTO usuarios (id_usuario, login, nome, senha_hash, tentativas_falhas, bloqueado, primeiro_acesso)
+VALUES (1, 'admin', 'Administrador', '$2y$12$1xFkhUTCYRfcB4j0JLXCfOYELCrr7U4ZgPLgIkWYPeg0fWv1/d60K', 0, 0, 1);
 
 -- =====================================================================
 -- DADOS INICIAIS (seed) — exemplos reais para demonstração

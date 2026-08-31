@@ -1,7 +1,7 @@
 <?php
 /**
  * backend/config/semente.php — Dados iniciais (seed)
- * Espelha o conteúdo de database/bd_mundo.sql para o modo demonstração.
+ * Dados iniciais das entidades geográficas para o modo demonstração.
  * Troque/edite à vontade: dados reais valorizam o trabalho.
  */
 

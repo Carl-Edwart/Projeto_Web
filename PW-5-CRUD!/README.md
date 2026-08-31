@@ -28,6 +28,10 @@ informações geográficas do mundo. Implementa as quatro operações do **CRUD*
 - ✅ Mensagens de feedback após cada operação
 - ✅ Idade do governante calculada automaticamente (JS)
 - ✅ **Integridade referencial** tratada (ver seção abaixo)
+- ✅ Autenticação por sessão com logout e proteção das páginas
+- ✅ Bloqueio persistente após 3 tentativas consecutivas de senha inválida
+- ✅ Troca obrigatória de senha no primeiro acesso e manutenção voluntária
+- ✅ Auditoria de autenticação e alteração de senha na tabela `logs`
 - ⭐ **Extra:** busca dinâmica global (AJAX) de países e cidades
 - ⭐ **Extra:** estatísticas no painel inicial (cidade mais populosa, cidades por continente, cidade mais populosa de cada país)
 
@@ -61,6 +65,7 @@ Regras adotadas (decisão documentada no código e nas FKs):
 ```
 crud-mundo/
 ├── index.php                  ← painel inicial (dashboard + estatísticas)
+├── login.php / logout.php     ← autenticação e encerramento da sessão
 ├── database/
 │   └── bd_mundo.sql           ← script de criação do banco + dados iniciais
 ├── backend/
@@ -68,6 +73,7 @@ crud-mundo/
 │   ├── config/
 │   │   ├── database.php       ← conexão PDO (MySQL)
 │   │   └── semente.php        ← seed usado apenas no modo demonstração
+│   ├── auth/senha.php          ← troca obrigatória ou voluntária de senha
 │   ├── api/buscar.php         ← endpoint JSON da busca dinâmica
 │   ├── continentes/  (index.php, form.php, excluir.php)
 │   ├── paises/       (index.php, form.php, excluir.php)
@@ -91,6 +97,16 @@ crud-mundo/
 4. Se necessário, ajuste usuário/senha em `backend/config/database.php`
    (padrão XAMPP: `root` sem senha).
 5. Acesse: **http://localhost/crud-mundo/**
+
+### Primeiro acesso
+
+O SQL inclui uma conta inicial para a demonstração:
+
+| Usuário | Senha inicial |
+|---|---|
+| `admin` | `Mundo@123` |
+
+Essa senha existe apenas para permitir o primeiro login e deve ser trocada na tela obrigatória. O banco armazena somente o hash produzido por `password_hash()`.
 
 ### 🐧 Linux (XAMPP)
 
@@ -126,7 +142,19 @@ sudo mysql < database/bd_mundo.sql
 
 > ⚡ **Modo demonstração:** se o MySQL não for encontrado, o sistema cria
 > automaticamente um banco SQLite local com os mesmos dados — útil para uma
-> pré-visualização rápida (os dados de verdade ficam no MySQL da entrega).
+> pré-visualização rápida (os dados de verdade ficam no MySQL da entrega). A conta
+> `admin` também é criada no SQLite e exige troca da senha no primeiro acesso.
+
+## 🔐 Autenticação e segurança
+
+- Todas as páginas do dashboard e dos quatro CRUDs exigem uma sessão autenticada.
+- Após três senhas consecutivas incorretas, a conta é bloqueada no banco e não pode entrar novamente, mesmo com a senha correta.
+- Um login correto antes do terceiro erro zera o contador de tentativas.
+- Enquanto `primeiro_acesso` estiver ativo, qualquer acesso direto às URLs do sistema redireciona para a troca de senha.
+- Senhas são verificadas com `password_verify()` e armazenadas com `password_hash()`; nenhum hash ou senha é gravado em `logs`.
+- Formulários POST usam token CSRF armazenado na sessão e as saídas HTML passam por escaping.
+
+Para testar rapidamente o fluxo: faça três tentativas inválidas com `admin`, confirme o bloqueio; recrie o banco demo ou limpe a conta para testar o primeiro acesso; depois altere a senha e valide o acesso normal, logout e login novamente.
 
 ## 🌿 Versionamento
 

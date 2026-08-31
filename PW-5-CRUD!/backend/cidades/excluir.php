@@ -1,6 +1,7 @@
 <?php
 require dirname(__DIR__, 2) . '/backend/helpers.php';
 exigirPost();
+$usuario = exigirAutenticacao();
 
 $pdo = db();
 $id  = postInt('id');

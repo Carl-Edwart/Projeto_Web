@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/backend/helpers.php';
+$usuario = exigirAutenticacao();
 $pdo = db();
 
 $titulo = 'Início';

@@ -49,6 +49,10 @@ h1, h2, h3 { line-height: 1.2; margin: 0 0 .35em; }
 p { margin: 0 0 1em; }
 a { color: var(--mar); text-decoration: none; }
 a:hover { text-decoration: underline; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 3px solid rgba(14, 116, 144, .35);
+    outline-offset: 2px;
+}
 
 .container { width: min(1120px, 100% - 2rem); margin-inline: auto; }
 .pagina { padding-block: 1.75rem 3.5rem; animation: subir .35s ease both; }
@@ -86,6 +90,22 @@ a:hover { text-decoration: underline; }
 .topo nav a:hover { background: rgba(255, 255, 255, .14); text-decoration: none; }
 .topo nav a.ativo { background: #fff; color: var(--mar-esc); box-shadow: 0 4px 14px -6px rgba(0,0,0,.4); }
 .nav-icone { font-size: .95em; }
+
+.conta-usuario {
+    display: flex; align-items: center; gap: .5rem; margin-left: .15rem;
+    color: #e0f2fe; font-size: .82rem;
+}
+.conta-nome {
+    max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.conta-link { color: #fff; font-weight: 600; }
+.conta-link:hover { color: #cffafe; }
+.conta-usuario form { margin: 0; }
+.btn-sair {
+    padding: .34rem .7rem; border-color: rgba(255,255,255,.35);
+    background: rgba(255,255,255,.12); color: #fff; font-size: .82rem;
+}
+.btn-sair:hover { background: rgba(255,255,255,.24); }
 
 .nav-btn {
     display: none; flex-direction: column; gap: 4px;
@@ -223,6 +243,11 @@ a:hover { text-decoration: underline; }
 }
 .form-acoes { grid-column: 1 / -1; display: flex; gap: .6rem; margin-top: .25rem; }
 
+.senha-requisitos {
+    grid-column: 1 / -1; padding: .7rem .85rem; border-radius: var(--raio-pq);
+    color: var(--cinza); background: #f8fafc; border: 1px solid var(--borda); font-size: .86rem;
+}
+
 /* ------------------------------- Alertas ---------------------------- */
 .alerta {
     display: flex; align-items: center; gap: .7rem;
@@ -348,6 +373,37 @@ a:hover { text-decoration: underline; }
 }
 .faixa-demo code { background: rgba(255,255,255,.15); padding: 0 .35rem; border-radius: 4px; }
 
+/* --------------------------- Autenticação ---------------------------- */
+.auth-page { display: grid; min-height: 100vh; place-items: center; }
+.auth-layout { width: min(100%, 500px); padding: 2rem 1rem; }
+.auth-card {
+    padding: 2.2rem; background: #fff; border: 1px solid var(--borda);
+    border-radius: var(--raio); box-shadow: var(--sombra-hover);
+}
+.auth-marca {
+    display: inline-flex; align-items: center; gap: .55rem; color: var(--tinta);
+    font-size: 1.15rem; font-weight: 500; margin-bottom: 2.1rem;
+}
+.auth-marca:hover { text-decoration: none; }
+.auth-marca-icone {
+    display: grid; place-items: center; width: 2.35rem; height: 2.35rem;
+    border-radius: 12px; background: var(--mar-claro); font-size: 1.35rem;
+}
+.auth-cabecalho { margin-bottom: 1.35rem; }
+.auth-kicker {
+    margin: 0 0 .3rem; color: var(--mar); font-size: .74rem; font-weight: 800;
+    letter-spacing: .08em; text-transform: uppercase;
+}
+.auth-cabecalho h1 { font-size: 1.65rem; }
+.auth-cabecalho p:last-child { color: var(--cinza); margin: 0; }
+.auth-form { display: grid; gap: 1rem; }
+.auth-form .campo { gap: .35rem; }
+.auth-form .campo input { padding: .7rem .8rem; }
+.btn-entrar { width: 100%; margin-top: .25rem; padding-block: .68rem; }
+.auth-rodape {
+    margin: 1.4rem 0 0; color: var(--cinza-claro); font-size: .78rem; text-align: center;
+}
+
 /* ---------------------------- Responsivo ---------------------------- */
 @media (max-width: 920px) {
     .topo-interno { flex-wrap: wrap; }
@@ -360,6 +416,7 @@ a:hover { text-decoration: underline; }
     .topo nav a { width: 100%; }
     .busca-caixa { width: 100%; order: 3; }
     #busca-global, #busca-global:focus { width: 100%; }
+    .conta-usuario { margin-left: 0; }
     .formulario { grid-template-columns: 1fr; }
 }
 
@@ -384,4 +441,7 @@ a:hover { text-decoration: underline; }
     .tabela.responsiva td.acoes::before { content: ""; }
     .tabela.responsiva td small.detalhe { margin-left: auto; }
     .pagina-topo h1 { font-size: 1.3rem; }
+    .auth-card { padding: 1.5rem; }
+    .auth-marca { margin-bottom: 1.6rem; }
+    .conta-nome { display: none; }
 }

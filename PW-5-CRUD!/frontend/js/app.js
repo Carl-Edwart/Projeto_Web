@@ -115,6 +115,47 @@
         });
     });
 
+    /* ---------------------- Troca de senha ------------------------- */
+    document.querySelectorAll("form[data-senha]").forEach(function (form) {
+        form.addEventListener("submit", function (e) {
+            var nova = form.querySelector("#nova_senha");
+            var confirmacao = form.querySelector("#confirmacao_senha");
+            var atual = form.querySelector("#senha_atual");
+            var minimo = nova ? parseInt(nova.getAttribute("minlength") || "8", 10) : 8;
+            var erros = [];
+
+            if (nova && nova.value.length < minimo) {
+                erros.push("A nova senha deve ter pelo menos " + minimo + " caracteres.");
+            }
+            if (nova && confirmacao && nova.value !== confirmacao.value) {
+                erros.push("A confirmação não coincide com a nova senha.");
+            }
+            if (nova && atual && nova.value && nova.value === atual.value) {
+                erros.push("A nova senha deve ser diferente da senha atual.");
+            }
+
+            if (erros.length) {
+                e.preventDefault();
+                mostrarErros(form, erros);
+            } else {
+                var caixa = form.querySelector(".erros-js");
+                if (caixa) { caixa.remove(); }
+            }
+        });
+    });
+
+    /* Evita duplo envio e dá retorno imediato durante a autenticação. */
+    document.querySelectorAll("form[data-login]").forEach(function (form) {
+        form.addEventListener("submit", function () {
+            var botao = form.querySelector("button[type=submit]");
+            if (botao) {
+                botao.disabled = true;
+                botao.textContent = "Entrando…";
+                form.setAttribute("aria-busy", "true");
+            }
+        });
+    });
+
     /* -------- Datas: limite de hoje + idade automática ------------- */
     var hoje = new Date().toISOString().slice(0, 10);
     document.querySelectorAll('input[type="date"][data-max-hoje]').forEach(function (d) {
